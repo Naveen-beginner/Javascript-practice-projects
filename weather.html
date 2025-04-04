@@ -1,0 +1,138 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body, html {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        .container {
+            /* height: 400px; */
+            height: auto;
+            width: 300px;
+            background-color: white;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1), -2px -2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            padding: 15px;
+        }
+
+        .container .desc {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .container .c-1 input {
+            border-radius: 4px;
+            border: 2px solid rgb(247, 246, 246);
+            width: 50%;
+            margin-left: 45px;
+            height: 30px;
+            outline: none;
+            background-color: transparent;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            padding: 4px;
+        }
+
+        .container .c-1 .btn {
+            outline: none;
+            border: 1px solid rgb(255, 255, 255);
+            padding-inline: 10px;
+            padding-block: 10px;
+            border-radius: 10px;
+            background-color: transparent;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            font-family: Georgia, 'Times New Roman', Times, serif;
+
+        }
+
+        .container .result {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .container .result ul {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
+            width: 100px;
+            border-radius: 16px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .container .result ul li {
+            list-style-type: none;
+            text-align: center;
+            font-size: 12px;
+        }
+    </style>
+ </head>
+ <body>
+    <div class="container">
+        <div class="c-1">
+            <input type="text" id="input">
+        <button class="btn" id="btn" onclick="getWeather();">Get</button>
+        </div>
+        <div class="desc">
+            <p id="city" style="font-weight: 600; font-size: 20px;">India</p>
+                <p id="image">🌦️</p>
+                    <p id="temp"><span style="font-size: 20px;">20</span> <sup>o</sup> <span style="font-size: 12px; font-weight: bold;">Celsius</span></p>
+        </div>
+        <div class="result">
+            <ul id="clouds">
+                <li><p style="font-size: 16px;font-weight: lighter;">Clouds</p></li>
+                <li><p>100%</p></li>
+             </ul>
+            <ul id="humidity">
+                    <li><p style="font-size: 16px;font-weight: lighter;">Humidity</p></li>
+                    <li><p>77%</p></li>
+                 </ul>
+        </div>
+    </div>
+    <script>
+        let id = "f5cf96cf6abd37cd7a4017c7e6c33a1a";
+        let url = `https://api.openweathermap.org/data/2.5/weather?units=metric&appid=` + id;
+        let input = document.getElementById('input');
+        let city = document.getElementById('city');
+        let btn = document.getElementById('btn');
+        let image = document.getElementById('image');
+        let temp = document.getElementById('temp');
+        let clouds = document.getElementById('clouds');
+        let humidity = document.getElementById('humidity');
+
+        const getWeather = () => {
+            try{
+            fetch(url + `&q=${input.value}`)
+            .then((response) => response.json())
+            .then(data => {
+                console.log(data);
+                if (data.cod == 200) {
+                    city.innerText = data.name;
+                    temp.innerText = data.main.temp;
+                    clouds.children[1].innerText = data.clouds.all;
+                    humidity.children[1].innerText = data.main.humidity;
+                } else {
+                    alert("City not found");
+                }
+             })
+            } catch (error) {
+                console.error("Error fetching weather data:", error);
+            }
+        } 
+    </script>
+ </body>
+ </html>

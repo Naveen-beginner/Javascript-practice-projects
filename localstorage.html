@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container {
+            width: 300px;
+            height: 300px;
+            border: 2px solid silver;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #container > button {
+            width: 160px;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            outline: none;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-weight: lighter;
+            font-size: smaller;
+        }
+    </style>
+</head>
+<body>
+
+    <form action="_blank" method="post" id="myForm">
+        <label for="user">Username</label> <br>
+        <input type="text" id="user" autocomplete="username"> <br>
+        <label for="email">Email</label> <br>
+        <input type="email" id="email" autocomplete="email"> <br> <br>
+        <input type="submit" value="submit">
+    </form>
+
+    <script>
+        const form = document.getElementById('myForm');
+        // let user = document.getElementById('user').value;
+        // let email = document.getElementById('email').value;
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            console.log("Form submission prevented");
+
+            let user = document.getElementById('user').value;
+            let email = document.getElementById('email').value;
+            localStorage.setItem("savedUsername", user);
+            localStorage.setItem("savedEmail", email);
+
+            alert("Data entered in the form is saved");
+        });
+
+        window.onload = function() {
+            document.getElementById('user').value = localStorage.getItem("savedUsername") || "";
+            document.getElementById('email').value = localStorage.getItem("savedEmail") || "";
+        };
+    </script>
+</body>
+</html>

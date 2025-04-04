@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="filters">
+        <h3>FILTERS</h3>
+        <button class="filter-option" data-filter="swims">swims</button>
+        <button class="filter-option" data-filter="walks">walks</button>
+        <button class="filter-option" data-filter="flies">flies</button>
+        <button class="filter-option" data-filter="*">ALL</button>
+    </div>
+    <div class="list">
+        <h3>Animlas</h3>
+        <div class="dog walks">Dog</div>
+        <div class="cow walks">Cow</div>
+        <div class="shark swims">Shark</div>
+        <div class="eagle flies">Eagle</div>
+        <div class="human walks swims">Human</div>
+        <div class="canary files">Canary</div>
+        <div class="salamander swims">Salamander</div>
+    </div>
+    <script>
+        const file = (e) => {
+            const animals = document.querySelectorAll(".list div");
+            let filter = e.target.dataset.filter;
+            if (filter === '*') {
+                animals.forEach((animal) => {
+                    animal.classList.remove('hidden');
+                });
+            } else {
+                animals.forEach((animal) => {
+                    animal.classList.contains(filter) ? animal.classList.remove('hidden') : animal.classList.add('hidden');
+                })
+            }
+        }
+
+        const btns = document.querySelectorAll('.filter-option')
+        btns.forEach((btn) => {
+            btn.addEventListener('click', file);
+        })
+    </script>
+</body>
+</html>

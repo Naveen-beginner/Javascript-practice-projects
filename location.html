@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gettin location of users</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            display: flex;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+            background-color: rgb(29, 29, 29);
+        }
+
+        .container {
+            width: 400px;
+            height: 400px;
+            border-radius: 30px;
+            padding: 20px;
+            border: none;
+            background-color: white;
+            outline: none;
+            box-shadow: 0 2px 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-direction: column;
+            gap: 1px;
+        }
+
+        .container p {
+            font-size: 12px;
+            width: 220px;
+            height: 30px;
+            text-align: center;
+            padding: 5px;
+            border: 1px solid silver;
+            border-radius: 10px;
+            background-color: white;
+        }
+
+        .container button {
+            width: 300px;
+            height: 40px;
+            border: none;
+            outline: none;
+            background-color: rgb(255, 255, 255);
+            color: black;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <label for="latitude">Latitude:</label>
+        <p class="latitude"></p>
+        <label for="longitude">Longitude: </label>
+        <p class="longitude"></p>
+        <label for="accuracy">Accuracy:</label>
+        <p class="accuracy"></p>
+        <button id="btn" onclick="getLocation()">Get Location</button>
+    </div>
+</body>
+<script>
+
+    const lat = document.querySelector('.latitude');
+    const lon = document.querySelector('.longitude');
+    const acc = document.querySelector('.accuracy');
+    const btn = document.querySelector('#btn');
+  function getLocation() {
+    if ("geolocation" in navigator) {
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+      const accuracy = position.coords.accuracy;
+
+      lat.innerText = `Latitude: ${latitude}`;
+      lon.innerText = `Longitude: ${longitude}`;
+      acc.innerText = `Accuracy: ${accuracy}`;
+
+      console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+    },
+    (error) => {
+      console.error('Error getting geolocation:', error);
+    },
+    { enableHighAccuracy: true } // Enable high-accuracy mode
+  );
+} else {
+  console.log('Geolocation is not supported by this browser.');
+}
+  }
+</script>
+</html>

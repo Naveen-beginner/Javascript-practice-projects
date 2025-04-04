@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 10px;
+            height: 100vh;
+            text-align: center;
+        }
+
+        button {
+            height: 40px;
+            width: 100px;
+            flex: 1;
+            border-radius: 30px;
+            padding: 10px;
+            outline: none;
+            border: none;
+            background-color: white;
+            box-shadow: rgba(49, 47, 47, 0.1) 0px 4px 12px;
+        }
+    </style>
+</head>
+<body>
+    <h4>Download and share logics using JavaScript</h4>
+    <button onclick="downloadText()">Download Text</button>
+    <button onclick="downloadImage()">Download Image</button>
+    <script>
+        // for downloading of a text file
+        function downloadText() {
+            const text = "Hello, World!";
+            const blob = new Blob([text], {type: "text/plain"});
+
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "sample.txt";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // for downloading of an image file
+        function downloadImage() {
+        const link = document.createElement("a");
+        link.href = "https://via.placeholder.com/150";
+        link.download = "image.jpg";
+        document.body.appendChild("link");
+        link.click();
+        document.body.removeChild("link");
+        }
+    </script>
+</body>
+</html>
