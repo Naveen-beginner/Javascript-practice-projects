@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Html 2 pdf</title>
+</head>
+<body>
+    <button id="download">Download as PDF</button>
+    <div id="content">
+        <h2>MY PDF CONTENT</h2>
+        <p>THIS CONTENT WILL BE CONVERTED INTO A PDF</p>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script>
+        document.getElementById('download').addEventListener('click', () => {
+            const ele = document.getElementById('content');
+            html2pdf().from(ele).save();
+        })
+    </script>
+</body>
+</html>
