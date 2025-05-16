@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accordion</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f2f2f2;
+            overflow-x: hidden;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        .box {
+            padding: 30px;
+            overflow: hidden;
+            width: 600px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .items {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .question {
+            padding: 10px 20px;
+            background-color: #f5f5f5;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 10px 10px 30px rgba(0,0,0,0.1);
+            text-align: left;
+            width: 300px;
+        }
+
+        .answer {
+            padding: 10px 20px;
+            max-height: 0;
+            overflow: hidden;
+            display: none;
+            transition: max-height 0.1s ease-out, padding ease, display ease-in;
+        }
+
+        .question.active .answer {
+            max-height: 100px;
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="box">
+
+        <div class="items">
+            <div class="question">What is the FAQ used for?</div>
+            <div class="answer">A FAQ - short for 'frequently asked questions' - is a list of questions and answers on a particular topic or system.</div>
+        </div>
+
+        <div class="items">
+            <div class="question">How do I open a FAQ?</div>
+            <div class="answer">Steps to create FAQ page supported by a robust knowledge base</div>
+        </div>
+
+    </div>
+
+    <script>
+        const questions = document.querySelectorAll('.question');
+
+        questions.forEach(q => {
+            q.addEventListener('click', () => {
+                const parent = q.parentElement;
+
+                document.querySelectorAll('.items').forEach(item => {
+                    if (item !== parent) {
+                        item.classList.remove('active');
+                    }
+                });
+                parent.classList.toggle('active');
+            });
+        });
+
+    </script>
+
+</body>
+</html>

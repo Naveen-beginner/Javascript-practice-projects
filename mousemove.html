@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse UI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .parallax {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+        }
+
+        .layer {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            opacity: 0.6;
+            transition: transform 0.1s linear;
+        }
+
+        .planet {
+            background-color: #ffaa00;
+            top: 30%;
+            left: 20%;
+        }
+
+        .rocket {
+            background-color: #00aaff;
+            top: 50%;
+            left: 60%;
+        }
+
+        .star {
+            background-color: #ffffff;
+            top: 70%;
+            left: 40%;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="parallax">
+        <div class="layer planet" data-speed="20"></div>
+        <div class="layer rocket" data-speed="40"></div>
+        <div class="layer star" data-speed="10"></div>
+    </div>
+
+    <script>
+        document.addEventListener("mousemove", (e) => {
+            const layers = document.querySelectorAll('.layer');
+            layers.forEach(layer => {
+                const speed = layer.getAttribute("data-speed");
+                const x = (window.innerWidth / 2 - e.pageX) * speed / 100;
+                const y = (window.innerHeight / 2 - e.pageY) * speed / 100;
+                layer.style.transform = `translate(${x}px, ${y}px)`;
+            })
+        })
+    </script>
+</body>
+</html>

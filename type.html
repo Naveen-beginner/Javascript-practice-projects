@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Type</title>
+    <style>
+
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #type-box {
+            font-size: 24px;
+            font-family: monospace;
+            color: #333;
+            font-weight: bold;
+        }
+
+        #cur {
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+    </style>
+</head>
+<body>
+    <div id="type-box">
+        I'm a <span id="txt"></span><span id="cur">|</span>
+    </div>
+
+    <script>
+        let txt = document.getElementById('txt');
+        const data = ['Web Designer', 'HTML Developer', 'CSS Developer', 'JS Developer', 'React Developer', 'Django Devloper', 'Backend Engineer', 'Node Developer', 'Express Devleoper', 'Mongoose DB','UI Lover'];
+        let i = 0, j = 0;
+        const spd = 100, erase = 50, pause = 1500;
+
+        function type() {
+            if (j < data[i].length) {
+                txt.textContent += data[i][j++];
+                setTimeout(type, spd);
+            } else {
+                setTimeout(del, pause);
+            }
+        }
+
+        function del() {
+            if (j > 0) {
+                txt.textContent = txt.textContent.slice(0, --j);
+                setTimeout(del, erase);
+            } else {
+                i = (i+ 1) % data.length;
+                setTimeout(type, spd)
+            }
+        }
+
+        type();
+
+    </script>
+</body>
+</html>
